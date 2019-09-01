@@ -19,5 +19,8 @@ BRANCH=$3
 BASE=$4
 
 # Implement your script here.
+mvn build-helper:parse-version versions:set -DnewVersion=$VERSION versions:commit
+git ls-files -co --exclude-standard | grep '\pom.xml$' | xargs git add
+git commit -am "Updated pom version to set hotfix version number"
 
 exit 0
