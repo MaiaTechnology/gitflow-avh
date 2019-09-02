@@ -19,8 +19,14 @@ BRANCH=$3
 BASE=$4
 
 # Implement your script here.
-mvn build-helper:parse-version versions:set -DnewVersion=$VERSION versions:commit
-git ls-files -co --exclude-standard | grep '\pom.xml$' | xargs git add
-git commit -am "Updated pom version to set hotfix version number"
+if test -f "pom.xml"; then
+  mvn build-helper:parse-version versions:set -DnewVersion=$VERSION versions:commit
+  git ls-files -co --exclude-standard | grep '\pom.xml$' | xargs git add
+  git commit -am "Updated pom version to set hotfix version number"
+fi
+
+if test -f "package.json"; then
+  npm version $VERSION
+fi
 
 exit 0
