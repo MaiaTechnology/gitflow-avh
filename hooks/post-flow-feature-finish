@@ -17,8 +17,17 @@ ORIGIN=$2
 BRANCH=$3
 
 # Implement your script here.
-mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.incrementalVersion} versions:commit
-git ls-files -co --exclude-standard | grep '\pom.xml$' | xargs git add
-git commit -am "Updated pom version to exclude feature name"
+if test -f "pom.xml"; then
+  mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.incrementalVersion} versions:commit
+  git ls-files -co --exclude-standard | grep '\pom.xml$' | xargs git add
+  git commit -am "Updated maven pom version to exclude feature name"
+fi
+
+if test -f "package.json"; then
+  prop="version"
+  current_version="$(node -pe "require('./package.json')['$prop']")"
+  npm version patch --no-git-tag-version
+  git add package.json package-lock.json && git commit -am "Updated npm package version to exclude feature name"
+fi
 
 exit 0

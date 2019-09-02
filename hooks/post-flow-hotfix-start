@@ -22,11 +22,12 @@ BASE=$4
 if test -f "pom.xml"; then
   mvn build-helper:parse-version versions:set -DnewVersion=$VERSION versions:commit
   git ls-files -co --exclude-standard | grep '\pom.xml$' | xargs git add
-  git commit -am "Updated pom version to set hotfix version number"
+  git commit -am "Updated maven pom version to set hotfix version number"
 fi
 
 if test -f "package.json"; then
-  npm version $VERSION
+  npm version $VERSION --no-git-tag-version
+  git add package.json package-lock.json && git commit -am "Updated npm package version to set hotfix version number"
 fi
 
 exit 0
