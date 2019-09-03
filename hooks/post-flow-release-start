@@ -19,5 +19,15 @@ BRANCH=$3
 BASE=$4
 
 # Implement your script here.
+if test -f "pom.xml"; then
+  mvn build-helper:parse-version versions:set -DnewVersion=$VERSION versions:commit
+  git ls-files -co --exclude-standard | grep '\pom.xml$' | xargs git add
+  git commit -am "Updated maven pom version to set release version number"
+fi
+
+if test -f "package.json"; then
+  npm version $VERSION --no-git-tag-version
+  git add package.json package-lock.json && git commit -am "Updated npm package version to set release version number"
+fi
 
 exit 0
