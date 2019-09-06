@@ -99,7 +99,7 @@ install)
 	esac
 	git status
 	ls -la
-	ls -la hooks
+	ls -la gitflow/hooks
 	install -v -d -m 0755 "$PREFIX/bin"
 	install -v -d -m 0755 "$DOCDIR/hooks"
 	for exec_file in $EXEC_FILES ; do
