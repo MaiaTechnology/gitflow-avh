@@ -70,7 +70,7 @@ install)
 	if [ -d "$REPO_NAME" -a -d "$REPO_NAME/.git" ] ; then
 		echo "Using existing repo: $REPO_NAME"
 	else
-		echo "Cloning repo from GitHub to $REPO_NAME"
+		echo "Cloning repo from $REPO_HOME to $REPO_NAME"
 		git clone "$REPO_HOME" "$REPO_NAME"
 	fi
 	cd "$REPO_NAME"
