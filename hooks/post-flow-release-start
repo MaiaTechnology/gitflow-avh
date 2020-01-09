@@ -25,7 +25,8 @@ if test -f "pom.xml"; then
   git commit -am "Updated maven pom version to set release version number"
 fi
 
-if test -f "package.json"; then
+if test -f "ui/package.json"; then
+  cd ui
   npm version $VERSION --no-git-tag-version
   git add package.json package-lock.json && git commit -am "Updated npm package version to set release version number"
 fi
