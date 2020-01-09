@@ -17,11 +17,14 @@ ORIGIN=$2
 BRANCH=$3
 
 # Implement your script here.
-echo "Branch is: $BRANCH"
-current_version="$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
-echo "Current version is: $current_version"
-export old_version=$current_version
-echo "export gitflow_pre_version=$current_version" >> $TMPDIR/git_pre_ver.sh
+
+# -- START -- not ready for use with dev team.
+# echo "Branch is: $BRANCH"
+# current_version="$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
+# echo "Current version is: $current_version"
+# export old_version=$current_version
+# echo "export gitflow_pre_version=$current_version" >> $TMPDIR/git_pre_ver.sh
+# -- FINISH -- not ready for use with dev team.
 
 # To terminate the git-flow action, return a non-zero exit code.
 exit 0
