@@ -25,7 +25,8 @@ if test -f "pom.xml"; then
   git commit -am "Updated maven pom version to include feature name"
 fi
 
-if test -f "package.json"; then
+if test -f "ui/package.json"; then
+  cd ui
   prop="version"
   current_version="$(node -pe "require('./package.json')['$prop']")"
   npm version "${current_version}-${NAME}" --no-git-tag-version
